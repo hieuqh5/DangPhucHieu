@@ -1,0 +1,157 @@
+public class Cart {
+     public static final int MAX_NUMBERS_ORDERED  = 20;
+     private DigitalVideoDisc itemsOrdered[] = 
+    		 new DigitalVideoDisc[MAX_NUMBERS_ORDERED] ;
+     private int qtyOrdered = 0;
+     public void addDigitalVideoDisc(DigitalVideoDisc disc ) {
+    	  itemsOrdered[qtyOrdered] = disc;
+    	  qtyOrdered++;
+     }
+     public void removeDigitalVideoDisc(DigitalVideoDisc disc ) {
+    	 for(int i = 0; i < qtyOrdered; i++) {
+    		 if(itemsOrdered[i]==disc) {
+    			 itemsOrdered[i] = itemsOrdered[i+1];
+    		 }
+    		 
+    	 }
+    	 qtyOrdered--;
+    	 
+     }
+    
+     public float totalCost() {
+    	 float a = 0;
+    	 for(int i = 0 ; i < qtyOrdered; i++) {
+    	       a += itemsOrdered[i].getCost(); 	 
+    	 }
+    	 return a;
+     }
+     public void addDigitalVideoDisc(DigitalVideoDisc [] dvdList) {
+    	 for(int i = 0 ; i < dvdList.length; i++) {
+    		 itemsOrdered[i] = dvdList[i];
+    	 }
+    	 qtyOrdered = dvdList.length;
+     }
+     public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+         itemsOrdered[0] = dvd1;
+         itemsOrdered[1] = dvd2;
+         qtyOrdered = 2;
+     }
+     public void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+    	
+    	String tmp1 = dvd1.getTitle();
+    	dvd1.setTitle(dvd2.getTitle());
+    	dvd2.setTitle(tmp1);
+    	String tmp2 = dvd1.getCategory();
+    	dvd1.setCategory(dvd2.getCategory());
+    	dvd2.setCategory(tmp2);
+    	String tmp3 = dvd1.getDirector();
+    	dvd1.setDirector(dvd2.getDirector());
+    	dvd2.setDirector(tmp3);
+    	int tmp4 = dvd1.getLength();
+    	dvd1.setLength(dvd2.getLength());
+    	dvd2.setLength(tmp4);
+    	float tmp = dvd1.getCost();
+    	dvd1.setCost(dvd2.getCost());
+    	dvd2.setCost(tmp);
+     }
+     public void sortByCost() {
+    	 int min;
+    	 for(int i = 0 ; i < qtyOrdered - 1; i++) {
+    		 min = i;
+    		 for(int j = i+ 1; j < qtyOrdered; j++) {
+    			 if(itemsOrdered[j].getCost() > itemsOrdered[min].getCost()) {
+    				 min = j;
+    			     swap(itemsOrdered[min],itemsOrdered[i]);
+    			 }
+    		 }
+    	 }
+     }
+     public void sortByTitle() {
+    	 int min;
+    	 for(int i = 0 ; i <  qtyOrdered - 1; i++) {
+    		 min = i;
+    		 for(int j = i+ 1; j < qtyOrdered; j++) {
+    			 if(itemsOrdered[j].getTitle().charAt(0) > itemsOrdered[min].getTitle().charAt(0)) {
+    				 min = j;
+    			     swap(itemsOrdered[min],itemsOrdered[i]);
+    			 }
+    			 else {  
+    				 if(itemsOrdered[j].getTitle().length() > itemsOrdered[i].getTitle().length()) {
+    				           min = j;
+    				           swap(itemsOrdered[min], itemsOrdered[i]);
+    				 }
+    			 }
+    		 }
+    	 } 
+     }
+     public void sortByLength() {
+    	 int min;
+    	 for(int i = 0 ; i < qtyOrdered - 1; i++) {
+    		 min = i;
+    		 for(int j = i+ 1; j < qtyOrdered; j++) {
+    			 if(itemsOrdered[j].getLength() > itemsOrdered[min].getLength()) {
+    				 min = j;
+    			     swap(itemsOrdered[min],itemsOrdered[i]);
+    			 }
+    		 }
+    	 }
+     }
+     public void search(String id) {
+    	 for(int i = 0 ; i < qtyOrdered; i++) {
+    		 if(itemsOrdered[i].getId()== id) {
+    			 System.out.println(itemsOrdered[i].getTitle());
+    		 }
+    	 }
+     }
+     public int numberOrdered() {
+    	 return qtyOrdered;
+     }
+     public DigitalVideoDisc[] list() {
+    	 return itemsOrdered;
+     }
+     
+  
+     public void getDetail() {
+     	for(int i = 0; i <61; i++) {
+     		System.out.print("*");
+     		if(i == 30) {
+     			System.out.print("CART");
+     		}
+     		
+     	 }
+     	for(int i = 0 ; i < qtyOrdered; i++) {
+     		int a = i+1;
+     	    System.out.print("\n" + a + "." + "DVD" + " - " + itemsOrdered[i].getTitle() + " - " + itemsOrdered[i].getCategory() + " - " + itemsOrdered[i].getDirector() + " - " + itemsOrdered[i].getLength() + ": " + itemsOrdered[i].getCost() + " $");
+     	 }
+     	
+         System.out.println();
+        for(int i = 0; i <65; i++) {
+    	
+ 		System.out.print("*");
+ 		
+ 	 	
+     	 }
+    
+     
+   }
+     public void searchByTitle(String yah) {
+    	 int k = 0;
+    	 for(int i = 0 ; i < qtyOrdered; i++) {
+    		 if(itemsOrdered[i].search(yah)==true) {
+    			 System.out.println(itemsOrdered[i].getTitle());
+    	         k++;	 
+    		 }
+    	 }
+    	 if(k==0) {
+    		 System.out.println("No match is found");
+    	 }
+    	 
+     }
+     public void placeOrder() {
+    	 for(int i =0 ; i < qtyOrdered; i++) {
+    		 removeDigitalVideoDisc(itemsOrdered[i]);
+    	 }
+     }
+}
+     
+

@@ -1,0 +1,228 @@
+static Store store1 = new Store();
+	static Cart cart1 = new Cart();
+	public static void showMenu() {
+		System.out.println("AIMS: ");
+		System.out.println("-------------------------------");
+		System.out.println("1. View store");
+		System.out.println("2. Update store");
+		System.out.println("3. See current cart");
+		System.out.println("0. Exit");
+		System.out.println("-------------------------------");
+		System.out.println("Please choose a number: 0-1-2-3");
+		int a;
+        Scanner input = new Scanner(System.in);
+        do {
+          a = input.nextInt();
+          if(a>3||a<0) {
+        	  System.out.println("The number you choose is not appropriate, please choose again :");
+        	  
+          }
+        }while((a>3)||(a<0));
+        switch (a) {
+		   case 1: 
+			
+			store1.showDVDs();
+			storeMenu();
+		    break;
+		   
+		   case 2 : 
+			  System.out.println("1. Add a new DVD");
+			  System.out.println("2. Remove a DVD");
+			  System.out.println("Please choose a number: 1-2");
+			  int lua_chon;
+		      do {
+		    	  lua_chon = input.nextInt();
+		    	  if(lua_chon>2||lua_chon<1) {
+		    		  System.out.println("Your option is not appropriate");
+		    	      }
+		    	 }while(lua_chon>2||lua_chon<1);
+		      switch(lua_chon) {
+		          case 1 : 
+		               System.out.println("Please input the information for the DVD to add to the store");
+		
+		               DigitalVideoDisc ins = new DigitalVideoDisc();
+		               ins.Input();
+		               store1.addDVD(ins);
+		               break;
+		          case 2 :
+		        	  System.out.println("Choose title of DVD to remove");
+		               String dvdname;
+		               dvdname = input.next();
+		               store1.removeDVD(dvdname);
+		        	   break;
+		        	   
+		      }
+		   case 3 : 
+			   cartMenu();
+			   break;
+		   case 0 :
+			   break;
+			   
+	  }
+		    
+		
+			
+}
+		
+	
+	
+  
+
+	public static void storeMenu() {
+		System.out.println();
+		System.out.println("Options: ");
+		System.out.println("-------------------------------");
+		System.out.println("1. See a DVD's details");
+		System.out.println("2. Add a DVD to cart");
+		System.out.println("3. See current cart");
+		System.out.println("0. Exit");
+		System.out.println("-------------------------------");
+		System.out.println("Please choose a number: 0-1-2-3");
+		int a;
+		Scanner sc = new Scanner(System.in);
+		do {
+		   a = sc.nextInt();
+		   if(a<0||a>3) {
+			   System.out.println("Please choose the appropriate number ");
+			   
+		   }
+		}while(a<0||a>3);
+		switch(a) {
+		      case 1 :
+		    	  System.out.println("Choose title of a DVD that you want to see the detail : ");
+		    	  String tit;
+		    	  tit = sc.next();
+		    	  store1.showDVDDetail(tit);
+		      case 2 : 
+		    	  int test =0;
+		    	  System.out.println("Choose id of a DVD that you want to add to cart"); 
+		    	  String ID;
+		    	  ID = sc.next();
+		    	  for(int i = 0 ; i  < store1.getSize(); i++) {
+		    		   if(store1.hieu()[i].getId().equals(ID)) {
+		    	         cart1.addDigitalVideoDisc(store1.hieu()[i]);
+		    	         test++;
+		    		   }
+		    	  }
+		    	  if(test==0) {
+		    		  System.out.println("DVD not available");
+		    	  }
+		    	   
+		      case 3:
+		    	  cartMenu();
+		          break;
+		          
+		      case 0:
+		    	  break;
+		    	 
+		    	  
+
+		}
+		
+	}
+	public static void cartMenu() {
+		System.out.println("Options: ");
+		System.out.println("-------------------------------");
+		System.out.println("1. Filter DVDs in cart");
+		System.out.println("2. Sort DVDs in cart");
+		System.out.println("3. Remove DVD from cart");
+		System.out.println("4. Place order");
+		System.out.println("0. Exit");
+		System.out.println("-------------------------------");
+		Scanner inp = new Scanner(System.in);
+		int k;
+	    do {
+	        k = inp.nextInt();
+	    	if(k>4||k<0) {
+	    		System.out.println("Wrong move, please choose again : ");
+	    	}
+	    	
+	    }while(k>4||k<0);
+	    switch(k) {
+	        case 1 :
+	        case 2 :
+	        	System.out.println("Please choose each of 2 options : ");
+	        	System.out.println("1. Sort by title");
+	        	System.out.println("2. Sort by cost");
+	        	int n;
+	        	do {
+	        		n = inp.nextInt();
+	        	    if(n>2||n<1) {
+	        	    	System.out.println("Wrong move, please choose again :");
+	        	    }
+	        	}while(n>2||n<1);
+	            switch (n) {
+				case 1: 
+				    cart1.sortByTitle();	
+				    break;
+				case 2: 
+					cart1.sortByCost();
+					break;
+	            }
+				cart1.getDetail();
+				break;
+				
+				
+	        case 3 :
+	        	System.out.println("Choose title of a DVD that you want to remove : ");
+	        	String titel;
+	        	titel = inp.next();
+	        	for(int i = 0; i < cart1.numberOrdered(); i++) {
+	        		if(cart1.list()[i].getTitle().equals(titel)) {
+	        			cart1.removeDigitalVideoDisc(cart1.list()[i]);
+	        		}
+	        	}
+	        	break;
+	        case 4 :
+	        	System.out.println("Do you want to place order : ");
+	        	String opt;
+	        	opt = inp.next();
+	        	System.out.println("Type 'yes' or 'no' :");
+	        	if(opt == "Yes") {
+	        		cart1.placeOrder();
+	        	}
+	        	if(opt == "No") {
+	        		break;
+	        	}
+	        	
+	            break;
+	        case 0 : 
+	    	    break;
+	       
+	    }
+       
+	 
+	}
+     public static void main(String[] args) {
+    	
+    	 
+    	
+    	
+    	 
+         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
+         
+    
+    	 DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
+    
+    	 DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 24.95f);
+        
+         
+    
+    	 DigitalVideoDisc dvd4 = new DigitalVideoDisc("End Game", "Super Hero", "Russo Brother", 151, 5f );
+    
+    	 DigitalVideoDisc dvd5 = new DigitalVideoDisc("Avatar", "Science Fiction", "James Cameron", 121, 10.5f);
+    	
+       
+ 
+     
+         store1.addDVD(dvd1);
+         store1.addDVD(dvd2);
+         store1.addDVD(dvd3);
+         store1.addDVD(dvd4);
+         store1.addDVD(dvd5);
+         
+    	 
+    	 System.out.println();
+    	 showMenu();
+     }
+}

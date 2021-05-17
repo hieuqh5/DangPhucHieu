@@ -1,0 +1,49 @@
+public class Store {
+     
+   DigitalVideoDisc[] itemsInStore = new DigitalVideoDisc[100];
+   public int quatity = 0 ;
+   
+   DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
+			 "Animation", "Roger Allers", 87, 19.95f);
+   public void addDVD(DigitalVideoDisc dvd) {
+	   itemsInStore[quatity] = dvd;
+	   quatity++;
+   }
+   public void removeDVD(String dvdname) {
+	   for(int i = 0 ; i < quatity; i++) {
+		   if(itemsInStore[i].getTitle() == dvdname) {
+			   itemsInStore[i] = itemsInStore[i+1];
+		   }
+	   }
+	   quatity--;
+   }
+   public void showDVDs() {
+	   for(int i = 0 ; i < quatity; i++) {
+		   int a = i+1;
+    	   System.out.print( "\n" + itemsInStore[i].getId() + ". " + "DVD" + " - " + itemsInStore[i].getTitle() + " - " + itemsInStore[i].getCategory() + " - " + itemsInStore[i].getDirector() + " - " + itemsInStore[i].getLength() + ": " + itemsInStore[i].getCost() + "$ " );
+	   }
+   }
+   
+   public void showDVDDetail(String titl) {
+	   for(int i =0 ; i < itemsInStore.length; i++) {
+		   if(itemsInStore[i].getTitle() == titl) {
+			   itemsInStore[i].Show();
+		   
+	   }
+      }
+   }
+	public int getSize() {
+		  return quatity;
+		   
+	   }
+	   
+	public DigitalVideoDisc[] hieu() {
+		return itemsInStore;
+	}
+		
+	   
+   
+	   
+   
+   
+  }

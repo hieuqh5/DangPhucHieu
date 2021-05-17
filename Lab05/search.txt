@@ -1,0 +1,6 @@
+public boolean search(String something) {
+    	if(title.contains(something)== true) {
+    		return true;
+    	}
+    	return false;
+    }
