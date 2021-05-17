@@ -1,0 +1,65 @@
+public class DVDUtils {
+	
+	 public static void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+		 float tmp = dvd1.getCost();
+		 dvd1.setCost(dvd2.getCost());
+		 dvd2.setCost(tmp);
+	 }
+     public static int compareCost(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+    	 if (dvd1.getCost() > dvd2.getCost()) {
+    		 return 1;
+    	 }
+    	  return 0;
+    
+    	 
+     }
+     public static int compareTitle(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+    	 if (dvd1.getTitle().charAt(0) > dvd2.getTitle().charAt(0)) {
+    		 return 1;
+    	 }
+    	
+    	return 0;
+    	 
+     }
+     public static DigitalVideoDisc[] sortCost(DigitalVideoDisc [] dvdList) {
+    	 int tmp;
+    	 for (int i = 0; i < dvdList.length-1 ; i++)
+    	    {
+    	    // Tìm phần tử nhỏ nhất trong mảng chưa sắp xếp
+    	    tmp = i;
+    	    for (int j = i+1; j < dvdList.length; j++) {
+    	        if (dvdList[j].getCost() < dvdList[tmp].getCost()) {
+    	          tmp = j;
+    	 
+    	    // Đổi chỗ phần tử nhỏ nhất với phần tử đầu tiên
+    	        swap(dvdList[tmp], dvdList[i]);
+    	        }
+    	        }
+    	    }
+    	 return dvdList;
+     }
+    	 
+    	 
+    	 
+     
+   public static DigitalVideoDisc[] sortTitle(DigitalVideoDisc [] dvdList) {
+	   int tmp;
+	   for(int i = 0 ; i < dvdList.length-1; i++) {
+		 tmp = i;
+		 for(int j = i+1; j < dvdList.length; j++) {
+	         if(dvdList[j].getTitle().charAt(0) < dvdList[tmp].getTitle().charAt(0)) {
+	        	 tmp = j;
+	        	 swap(dvdList[tmp], dvdList[i]);
+	         }
+		 
+		 
+		 }
+	 }
+	 return dvdList;
+	 }
+	 
+	 
+
+      
+     
+}
