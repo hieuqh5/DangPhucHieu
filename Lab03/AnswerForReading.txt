@@ -1,0 +1,2 @@
+An accessor method controls access to its attribute by providing a single location 
+to inspect and/or modify that attribute
